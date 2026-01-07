@@ -4,6 +4,12 @@ export default async function handler(req, res) {
   }
 
   try {
+    const { messages } = req.body || {};
+
+    if (!messages) {
+      return res.status(400).json({ error: "Messages missing" });
+    }
+
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -16,14 +22,16 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           model: "meta-llama/llama-3.2-3b-instruct:free",
-          messages: req.body.messages
+          messages
         })
       }
     );
 
     const data = await response.json();
-    res.status(200).json(data);
+    return res.status(200).json(data);
+
   } catch (err) {
-    res.status(500).json({ error: "AI request failed" });
+    console.error("Server error:", err);
+    return res.status(500).json({ error: "AI request failed" });
   }
 }

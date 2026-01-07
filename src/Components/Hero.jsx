@@ -117,7 +117,10 @@ const Hero = () => {
       }
 
       const data = await response.json();
-      setAiReply(data.choices?.[0]?.message?.content || "No response");
+      setAiReply(
+        data?.choices?.[0]?.message?.content ||
+        "AI is busy right now. Please try again."
+      );
 
     } catch (error) {
       console.error(error);
