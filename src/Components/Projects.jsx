@@ -47,7 +47,7 @@ const Projects = () => {
           <div className="aspect-video bg-neutral-900 rounded-3xl border border-white/10 overflow-hidden relative shadow-2xl">
              <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-transparent transition-all duration-700" />
              <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-950 flex items-center justify-center">
-             <img src='./src/assets/screencapture-localhost-5174-2026-01-06-16_59_10.jpg' className=' scale-115'/>
+             <img src='/assets/screencapture-localhost-5174-2026-01-06-16_59_10.jpg' className=' scale-115'/>
              </div>
           </div>
           
@@ -74,7 +74,7 @@ const Projects = () => {
           <div className="aspect-video bg-neutral-900 rounded-3xl border border-white/10 overflow-hidden relative shadow-2xl">
              <div className="absolute inset-0 bg-purple-500/5 group-hover:bg-transparent transition-all duration-700" />
              <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-950 flex items-center justify-center">
-                <img src='./src/assets/Nav Bar.png' className=' scale-100'/>
+                <img src='/assets/Nav Bar.png' className=' scale-100'/>
              </div>
           </div>
           

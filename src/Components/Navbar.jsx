@@ -15,7 +15,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="group cursor-pointer">
         <div className="text-2xl font-bold border border-white/20 w-10 h-10 flex items-center justify-center rounded-lg group-hover:bg-white group-hover:text-black transition-all duration-300 ease-in-out font-mono">
-          <img src='./src/assets/profile_photo_2.jpg' className=' rounded-md h-9 w-9'/>
+          <img src='/assets/profile_photo_2.jpg' className=' rounded-md h-9 w-9'/>
         </div>
       </div>
 
