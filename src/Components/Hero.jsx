@@ -92,20 +92,17 @@ const Hero = () => {
 
     try {
       // Direct API call - working version
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
+      const response = await fetch("/api/chat", {
+        method: "POST",
         headers: {
-          'Authorization': `Bearer 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`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://yourportfolio.com', // Change this to your domain
-          'X-Title': 'Swalih Portfolio'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "meta-llama/llama-3.2-3b-instruct:free", // More reliable model
           messages: [
             {
               role: "system",
-              content: "You are an AI assistant for Mohammed Swalih, a React developer from Kerala, India. Keep answers concise (1-2 sentences). If asked about contact, say to email at swalink555@gmail.com. If asked about skills, mention React, JavaScript, and modern web development."
+              content:
+                "You are an AI assistant for Mohammed Swalih, a React developer from Kerala. Keep replies short (1–2 sentences). If asked about contact, say email at swalink555@gmail.com."
             },
             {
               role: "user",
@@ -115,46 +112,27 @@ const Hero = () => {
         })
       });
 
-      console.log('Response status:', response.status);
-      
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Error:', errorText);
-        throw new Error(`API Error: ${response.status}`);
+        throw new Error("API request failed");
       }
 
       const data = await response.json();
-      console.log('API Response:', data);
-      
-      if (data.choices && data.choices[0]?.message?.content) {
-        setAiReply(data.choices[0].message.content);
-      } else {
-        setAiReply("Sorry, I couldn't generate a response. Try asking something else!");
-      }
+      setAiReply(data.choices?.[0]?.message?.content || "No response");
+
     } catch (error) {
-      console.error('Full error:', error);
-      setAiReply("Hmm, I'm having trouble connecting. Please check your connection and try again.");
+      console.error(error);
+      setAiReply("Hmm, I'm having trouble connecting. Please try again.");
     } finally {
       setLoading(false);
       setChatInput("");
     }
   };
 
-  // Alternative: Simple test function
   const testConnection = async () => {
-    setLoading(true);
-    try {
-      const testResponse = await fetch('https://openrouter.ai/api/v1/models');
-      const models = await testResponse.json();
-      console.log('Available models:', models);
-      setAiReply("✅ Connected to OpenRouter! " + models.data?.length + " models available.");
-    } catch (error) {
-      console.error('Connection test failed:', error);
-      setAiReply("❌ Connection failed. Check CORS or try a different model.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const res = await fetch("/api/test");
+  const data = await res.json();
+  setAiReply(`✅ Connected. ${data.count} models available.`);
+};
 
   return (
     <section id="home" className="h-screen flex flex-col items-center justify-center px-6 relative">
